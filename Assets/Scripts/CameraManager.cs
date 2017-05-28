@@ -21,7 +21,7 @@ public class CameraManager : MonoBehaviour
 			averageY /= GameManager.instance.players.Count;
 		}
 
-		float speedFactor = ((averageY - transform.position.y) / screenHeight) + 0.5f;
+		float speedFactor = (averageY - transform.position.y) / screenHeight;
 		float speed = Mathf.Max( Mathf.Lerp( minSpeed, maxSpeed, speedFactor ), minSpeed );
 		Vector3 offset = Vector3.up * speed * Time.deltaTime;
 
