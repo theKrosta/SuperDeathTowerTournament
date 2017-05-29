@@ -17,14 +17,14 @@ public class PlatformDamager : MonoBehaviour
 	
 	private float lastStateChange;
 	private State state;
-	private List<GameObject> collidingPlayers;
+	private HashSet<GameObject> collidingPlayers;
 
 	private SpriteRenderer rend;
 
 	void Awake()
 	{
 		state = State.Deactivated;
-		collidingPlayers = new List<GameObject>();
+		collidingPlayers = new HashSet<GameObject>();
 
 		rend = GetComponent<SpriteRenderer>();
 	}
