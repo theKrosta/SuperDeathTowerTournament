@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class PlayAreaManager : MonoBehaviour
 {
 	private const float screenHeight = 16.875f;
 
@@ -22,7 +22,7 @@ public class CameraManager : MonoBehaviour
 		}
 
 		float speedFactor = (averageY - transform.position.y) / screenHeight;
-		float speed = Mathf.Max( Mathf.Lerp( minSpeed, maxSpeed, speedFactor ), minSpeed );
+		float speed = Mathf.Lerp( minSpeed, maxSpeed, speedFactor );
 		Vector3 offset = Vector3.up * speed * Time.deltaTime;
 
 		transform.Translate( offset );
