@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
 
+[RequireComponent( typeof( Rigidbody2D ) )]
 public class PlayAreaManager : MonoBehaviour
 {
 	private const float screenHeight = 16.875f;
 
 	public float minSpeed;
 	public float maxSpeed;
-	
-	void LateUpdate()
+
+	private Rigidbody2D rbody;
+
+	void Awake()
+	{
+		rbody = GetComponent<Rigidbody2D>();
+	}
+
+	void FixedUpdate()
 	{
 		float averageY = 0;
 
@@ -21,10 +29,8 @@ public class PlayAreaManager : MonoBehaviour
 			averageY /= GameManager.instance.players.Count;
 		}
 
-		float speedFactor = (averageY - transform.position.y) / screenHeight;
+		float speedFactor = ((averageY - transform.position.y) / screenHeight ) + 0.5f;
 		float speed = Mathf.Lerp( minSpeed, maxSpeed, speedFactor );
-		Vector3 offset = Vector3.up * speed * Time.deltaTime;
-
-		transform.Translate( offset );
+		rbody.velocity = Vector3.up * speed;
 	}
 }
