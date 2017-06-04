@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,11 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void LoadScene( int index )
+	{
+		SceneManager.LoadScene( index );
+	}
+
 	public void AddPlayer( PlayerController player )
 	{
 		players.Add( player );
@@ -43,5 +49,10 @@ public class GameManager : MonoBehaviour
 	{
 		Time.timeScale = 0.5f;
 		gameOverScreen.Display( players[0] );
+	}
+
+	public void QuitGame()
+	{
+		Application.Quit();
 	}
 }
