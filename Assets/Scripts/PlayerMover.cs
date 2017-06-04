@@ -3,10 +3,12 @@
 [RequireComponent( typeof( Collider2D ), typeof( Rigidbody2D ) )]
 public class PlayerMover : MonoBehaviour
 {
+	public bool canDoubleJump;
 	public float jumpingForce;
 	public float walkingSpeed;
 	
 	private int groundMask;
+	private bool hasDoubleJumped;
 
 	private Collider2D coll;
 	private Rigidbody2D rbody;
@@ -21,9 +23,12 @@ public class PlayerMover : MonoBehaviour
 
 	public void Jump()
 	{
-		if ( CheckIfGrounded() )
+		bool isGrounded = CheckIfGrounded();
+
+		if ( isGrounded || (canDoubleJump && !hasDoubleJumped) )
 		{
 			rbody.AddForce( Vector2.up * jumpingForce, ForceMode2D.Impulse );
+			hasDoubleJumped = !isGrounded;
 		}
 	}
 
