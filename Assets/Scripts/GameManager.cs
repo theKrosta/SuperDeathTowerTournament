@@ -5,7 +5,9 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager instance { get; private set; }
 
-	public List<GameObject> players;
+	[HideInInspector] public GameOverScreen gameOverScreen;
+
+	public List<PlayerController> players { get; private set; }
 
 	void Awake()
 	{
@@ -13,6 +15,8 @@ public class GameManager : MonoBehaviour
 		{
 			instance = this;
 			DontDestroyOnLoad( gameObject );
+
+			players = new List<PlayerController>();
 		}
 		else if ( instance != this )
 		{
@@ -20,8 +24,24 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	void Start()
+	public void AddPlayer( PlayerController player )
 	{
-		players = new List<GameObject>();
+		players.Add( player );
+	}
+
+	public void RemovePlayer( PlayerController player )
+	{
+		players.Remove( player );
+
+		if ( players.Count == 1 )
+		{
+			GameOver();
+		}
+	}
+
+	private void GameOver()
+	{
+		Time.timeScale = 0.5f;
+		gameOverScreen.Display( players[0] );
 	}
 }

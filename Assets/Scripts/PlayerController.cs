@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
 		mover = GetComponent<PlayerMover>();
 	}
 
+	void Start()
+	{
+		GameManager.instance.AddPlayer( this );
+	}
+
 	void Update()
 	{
 		if ( Input.GetButtonDown( "Jump" ) )
@@ -19,5 +24,10 @@ public class PlayerController : MonoBehaviour
 
 		float hor = Input.GetAxisRaw( "Horizontal" );
 		mover.Walk( hor );
+	}
+
+	void OnDestroy()
+	{
+		GameManager.instance.RemovePlayer( this );
 	}
 }

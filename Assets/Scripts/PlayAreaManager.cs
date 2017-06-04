@@ -21,7 +21,7 @@ public class PlayAreaManager : MonoBehaviour
 
 		if ( GameManager.instance.players.Count > 0 )
 		{
-			foreach ( GameObject player in GameManager.instance.players )
+			foreach ( PlayerController player in GameManager.instance.players )
 			{
 				averageY += player.transform.position.y;
 			}
